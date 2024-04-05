@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>常用模版 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.判断n是否为素数 ：bool is_prime(int n) {    if (n &lt;&#x3D; 1) return false;    for (int i &#x3D; 2; i &lt;&#x3D; sqrt(n); i++) {        if (n % i &#x3D;&#x3D; 0) return false;    }    return true;} 2.求最大公">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用模版">
+<meta property="og:url" content="https://alanttor.github.io/2024/04/05/%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.判断n是否为素数 ：bool is_prime(int n) {    if (n &lt;&#x3D; 1) return false;    for (int i &#x3D; 2; i &lt;&#x3D; sqrt(n); i++) {        if (n % i &#x3D;&#x3D; 0) return false;    }    return true;} 2.求最大公">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-05T03:48:56.000Z">
+<meta property="article:modified_time" content="2024-04-05T03:52:09.300Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="几种常用模版">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://alanttor.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-常用模版" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/04/05/%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" class="article-date">
+  <time class="dt-published" datetime="2024-04-05T03:48:56.000Z" itemprop="datePublished">2024-04-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      常用模版
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1.判断n是否为素数 ：<br>bool is_prime(int n) {<br>    if (n &lt;&#x3D; 1) return false;<br>    for (int i &#x3D; 2; i &lt;&#x3D; sqrt(n); i++) {<br>        if (n % i &#x3D;&#x3D; 0) return false;<br>    }<br>    return true;<br>}</p>
+<p>2.求最大公约数：<br>int gcb(int a,int b){</p>
+<p>   return b&#x3D;&#x3D;0 ? a:gcb(b,a%b);</p>
+<p>}</p>
+<p>3.最长递增子序列<br>for ( j&#x3D;1; j&lt;len; j++ )<br>    for ( i&#x3D;0; i&lt;j; i++ )<br>        if ( a[j]&gt;a[i] &amp;&amp; dp[j]&lt;dp[i]+1 )<br>            dp[j] &#x3D; dp[i]+1;</p>
+<p>4.X的二进制长度<br> int BitLength(int x)<br>      {<br>          int d &#x3D; 0;<br>          while (x &gt; 0) {<br>              x &gt;&gt;&#x3D; 1;<br>              d++;<br>          }<br>          return d;<br>      }</p>
+<p>5.质因数分解<br> int reduce(int prime[],int pn,int n,int rest[])<br>      {<br>      int i,k&#x3D;0;<br>      for(i&#x3D;0;i&lt;pn;i++)<br>           {<br>           if (n&#x3D;&#x3D;1) break;<br>           if (prime[i]*prime[i]&gt;n) {rest[k++]&#x3D;n;break;}<br>           while(n%prime[i]&#x3D;&#x3D;0)<br>               {<br>               n&#x2F;&#x3D;prime[i];<br>               rest[k++]&#x3D;prime[i];<br>               }<br>           }<br>      return k;<br>      }</p>
+<p>6.任意进制转换<br>    void conversion(char s[],char s2[],long d1,long d2)<br>      {<br>          long i,j,t,num;<br>          char c;<br>          num&#x3D;0;<br>          for (i&#x3D;0;s[i]!&#x3D;’\0’;i++)<br>              {<br>              if (s[i]&lt;&#x3D;’9’&amp;&amp;s[i]&gt;&#x3D;’0’) t&#x3D;s[i]-‘0’; else t&#x3D;s[i]-‘A’+10;<br>              num&#x3D;num*d1+t;<br>              }<br>          i&#x3D;0;<br>          while(1)<br>              {<br>              t&#x3D;num%d2;<br>              if (t&lt;&#x3D;9) s2[i]&#x3D;t+’0’; else s2[i]&#x3D;t+’A’-10;<br>              num&#x2F;&#x3D;d2;<br>              if (num&#x3D;&#x3D;0) break;<br>              i++;<br>              }<br>          for (j&#x3D;0;j&lt;i&#x2F;2;j++)<br>              {c&#x3D;s2[j];s2[j]&#x3D;s[i-j];s2[i-j]&#x3D;c;}<br>          s2[i+1]&#x3D;’\0’;<br>      }</p>
+<p>7.大数加法<br> string solve(string s, string t) {<br>        &#x2F;&#x2F; write code here<br>        if(s.size()&lt;t.size())<br>        {<br>            string temp&#x3D;s;<br>            s&#x3D;t;<br>            t&#x3D;temp;<br>        }<br>        int len1&#x3D;s.size();<br>        int len2&#x3D;t.size();<br>        int num1,num2,flag&#x3D;0,sum;<br>        while(len1&gt;0)<br>        {<br>            num1&#x3D;s[len1-1]-‘0’;<br>            if(len2&gt;0)<br>                num2&#x3D;t[len2-1]-‘0’;<br>            else<br>                num2&#x3D;0;<br>            sum&#x3D;num1+num2+flag;<br>            s[len1-1]&#x3D;sum%10+’0’;<br>            flag&#x3D;sum&#x2F;10;<br>            len1–;<br>            len2–;<br>        }<br>        if(flag&#x3D;&#x3D;1)<br>            s&#x3D;”1”+s;<br>        return s;<br>    }</p>
+<p>8.字符串查找<br>    int strfind(char str[],char key[])<br>      {<br>          int l1,l2,i,j,flag;<br>          l1&#x3D;strlen(str);<br>          l2&#x3D;strlen(key);<br>          for (i&#x3D;0;i&lt;&#x3D;l1-l2;i++)<br>              {<br>              flag&#x3D;1;<br>              for (j&#x3D;0;j&lt;l2;j++)<br>                  if (str[i+j]!&#x3D;key[j]) {flag&#x3D;0;break;}<br>              if (flag) return i;<br>              }<br>          return -1;<br>      } </p>
+<p>9.背包问题<br>给你ｎ个价值的东西及背包容量ｃ，然后知道ｎ个东西的价值ｖ［ｉ］以及重量ｗ［ｉ］<br>求在背包容量范围为内可以装的最多的价值。<br>#include<iostream><br>#include&lt;stdlib.h&gt;<br>#include&lt;math.h&gt;<br>#include&lt;stdio.h&gt;<br>#include<algorithm><br>#include&lt;string.h&gt;<br>#include&lt;math.h&gt;<br>using namespace std;<br>int w[1005],v[1005],dp[1005];<br>int main()<br>{<br>    int i,j,tcase,n,c;<br>    scanf(“%d”,&amp;tcase);<br>    while(tcase–)<br>    {<br>        scanf(“%d%d”,&amp;n,&amp;c);<br>        for(i&#x3D;0;i&lt;n;i++)<br>        {<br>            scanf(“%d”,&amp;v[i]);<br>        }<br>        for(i&#x3D;0;i&lt;n;i++)<br>        {<br>            scanf(“%d”,&amp;w[i]);<br>        }<br>        memset(dp,0,sizeof(dp));<br>        for(i&#x3D;0;i&lt;n;i++)<br>          {<br>             for(j&#x3D;c;j&gt;&#x3D;w[i];j–)<br>               {<br>                   dp[j]&#x3D;max(dp[j],dp[j-w[i]]+v[i]);<br>               }<br>          }<br>        printf(“%d\n”,dp[c]);<br>    }<br>    return 0;<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://alanttor.github.io/2024/04/05/%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" data-id="clum4qq9w0000u4umf26gc38t" data-title="常用模版" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" rel="tag">几种常用模版</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/04/04/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">排序算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" rel="tag">几种常用模版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%81%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">十种排序算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE/" rel="tag">这是一个标签</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" style="font-size: 10px;">几种常用模版</a> <a href="/tags/%E5%8D%81%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 10px;">十种排序算法</a> <a href="/tags/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE/" style="font-size: 10px;">这是一个标签</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/04/05/%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/">常用模版</a>
+          </li>
+        
+          <li>
+            <a href="/2024/04/04/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/04/04/My-New-Host/">My New Host</a>
+          </li>
+        
+          <li>
+            <a href="/2024/04/03/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

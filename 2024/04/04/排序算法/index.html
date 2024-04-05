@@ -4,14 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>排序算法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://alanttor.github.io/index.html">
+  <meta name="description" content="12345678910111213141516&#x2F;&#x2F;1.冒泡排序private static void Bubble(int[] a) &amp;#123;    int j &#x3D; a.length - 1;    while (j !&#x3D; 0) &amp;#123;        int x &#x3D; 0;        for (int i &#x3D; 0; i &lt; j; i++) &amp;#123;            if">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="https://alanttor.github.io/2024/04/04/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="12345678910111213141516&#x2F;&#x2F;1.冒泡排序private static void Bubble(int[] a) &amp;#123;    int j &#x3D; a.length - 1;    while (j !&#x3D; 0) &amp;#123;        int x &#x3D; 0;        for (int i &#x3D; 0; i &lt; j; i++) &amp;#123;            if">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-04T09:32:27.000Z">
+<meta property="article:modified_time" content="2024-04-05T03:44:24.028Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="十种排序算法">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -71,60 +76,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-常用模版" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/04/05/%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" class="article-date">
-  <time class="dt-published" datetime="2024-04-05T03:48:56.000Z" itemprop="datePublished">2024-04-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/04/05/%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/">常用模版</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>1.判断n是否为素数 ：<br>bool is_prime(int n) {<br>    if (n &lt;&#x3D; 1) return false;<br>    for (int i &#x3D; 2; i &lt;&#x3D; sqrt(n); i++) {<br>        if (n % i &#x3D;&#x3D; 0) return false;<br>    }<br>    return true;<br>}</p>
-<p>2.求最大公约数：<br>int gcb(int a,int b){</p>
-<p>   return b&#x3D;&#x3D;0 ? a:gcb(b,a%b);</p>
-<p>}</p>
-<p>3.最长递增子序列<br>for ( j&#x3D;1; j&lt;len; j++ )<br>    for ( i&#x3D;0; i&lt;j; i++ )<br>        if ( a[j]&gt;a[i] &amp;&amp; dp[j]&lt;dp[i]+1 )<br>            dp[j] &#x3D; dp[i]+1;</p>
-<p>4.X的二进制长度<br> int BitLength(int x)<br>      {<br>          int d &#x3D; 0;<br>          while (x &gt; 0) {<br>              x &gt;&gt;&#x3D; 1;<br>              d++;<br>          }<br>          return d;<br>      }</p>
-<p>5.质因数分解<br> int reduce(int prime[],int pn,int n,int rest[])<br>      {<br>      int i,k&#x3D;0;<br>      for(i&#x3D;0;i&lt;pn;i++)<br>           {<br>           if (n&#x3D;&#x3D;1) break;<br>           if (prime[i]*prime[i]&gt;n) {rest[k++]&#x3D;n;break;}<br>           while(n%prime[i]&#x3D;&#x3D;0)<br>               {<br>               n&#x2F;&#x3D;prime[i];<br>               rest[k++]&#x3D;prime[i];<br>               }<br>           }<br>      return k;<br>      }</p>
-<p>6.任意进制转换<br>    void conversion(char s[],char s2[],long d1,long d2)<br>      {<br>          long i,j,t,num;<br>          char c;<br>          num&#x3D;0;<br>          for (i&#x3D;0;s[i]!&#x3D;’\0’;i++)<br>              {<br>              if (s[i]&lt;&#x3D;’9’&amp;&amp;s[i]&gt;&#x3D;’0’) t&#x3D;s[i]-‘0’; else t&#x3D;s[i]-‘A’+10;<br>              num&#x3D;num*d1+t;<br>              }<br>          i&#x3D;0;<br>          while(1)<br>              {<br>              t&#x3D;num%d2;<br>              if (t&lt;&#x3D;9) s2[i]&#x3D;t+’0’; else s2[i]&#x3D;t+’A’-10;<br>              num&#x2F;&#x3D;d2;<br>              if (num&#x3D;&#x3D;0) break;<br>              i++;<br>              }<br>          for (j&#x3D;0;j&lt;i&#x2F;2;j++)<br>              {c&#x3D;s2[j];s2[j]&#x3D;s[i-j];s2[i-j]&#x3D;c;}<br>          s2[i+1]&#x3D;’\0’;<br>      }</p>
-<p>7.大数加法<br> string solve(string s, string t) {<br>        &#x2F;&#x2F; write code here<br>        if(s.size()&lt;t.size())<br>        {<br>            string temp&#x3D;s;<br>            s&#x3D;t;<br>            t&#x3D;temp;<br>        }<br>        int len1&#x3D;s.size();<br>        int len2&#x3D;t.size();<br>        int num1,num2,flag&#x3D;0,sum;<br>        while(len1&gt;0)<br>        {<br>            num1&#x3D;s[len1-1]-‘0’;<br>            if(len2&gt;0)<br>                num2&#x3D;t[len2-1]-‘0’;<br>            else<br>                num2&#x3D;0;<br>            sum&#x3D;num1+num2+flag;<br>            s[len1-1]&#x3D;sum%10+’0’;<br>            flag&#x3D;sum&#x2F;10;<br>            len1–;<br>            len2–;<br>        }<br>        if(flag&#x3D;&#x3D;1)<br>            s&#x3D;”1”+s;<br>        return s;<br>    }</p>
-<p>8.字符串查找<br>    int strfind(char str[],char key[])<br>      {<br>          int l1,l2,i,j,flag;<br>          l1&#x3D;strlen(str);<br>          l2&#x3D;strlen(key);<br>          for (i&#x3D;0;i&lt;&#x3D;l1-l2;i++)<br>              {<br>              flag&#x3D;1;<br>              for (j&#x3D;0;j&lt;l2;j++)<br>                  if (str[i+j]!&#x3D;key[j]) {flag&#x3D;0;break;}<br>              if (flag) return i;<br>              }<br>          return -1;<br>      } </p>
-<p>9.背包问题<br>给你ｎ个价值的东西及背包容量ｃ，然后知道ｎ个东西的价值ｖ［ｉ］以及重量ｗ［ｉ］<br>求在背包容量范围为内可以装的最多的价值。<br>#include<iostream><br>#include&lt;stdlib.h&gt;<br>#include&lt;math.h&gt;<br>#include&lt;stdio.h&gt;<br>#include<algorithm><br>#include&lt;string.h&gt;<br>#include&lt;math.h&gt;<br>using namespace std;<br>int w[1005],v[1005],dp[1005];<br>int main()<br>{<br>    int i,j,tcase,n,c;<br>    scanf(“%d”,&amp;tcase);<br>    while(tcase–)<br>    {<br>        scanf(“%d%d”,&amp;n,&amp;c);<br>        for(i&#x3D;0;i&lt;n;i++)<br>        {<br>            scanf(“%d”,&amp;v[i]);<br>        }<br>        for(i&#x3D;0;i&lt;n;i++)<br>        {<br>            scanf(“%d”,&amp;w[i]);<br>        }<br>        memset(dp,0,sizeof(dp));<br>        for(i&#x3D;0;i&lt;n;i++)<br>          {<br>             for(j&#x3D;c;j&gt;&#x3D;w[i];j–)<br>               {<br>                   dp[j]&#x3D;max(dp[j],dp[j-w[i]]+v[i]);<br>               }<br>          }<br>        printf(“%d\n”,dp[c]);<br>    }<br>    return 0;<br>}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://alanttor.github.io/2024/04/05/%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" data-id="clum4qq9w0000u4umf26gc38t" data-title="常用模版" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" rel="tag">几种常用模版</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-排序算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-排序算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/04/04/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="article-date">
   <time class="dt-published" datetime="2024-04-04T09:32:27.000Z" itemprop="datePublished">2024-04-04</time>
@@ -137,8 +89,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/04/04/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      排序算法
     </h1>
   
 
@@ -178,103 +130,28 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-My-New-Host" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/04/04/My-New-Host/" class="article-date">
-  <time class="dt-published" datetime="2024-04-04T08:50:07.505Z" itemprop="datePublished">2024-04-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2024/04/05/%E5%B8%B8%E7%94%A8%E6%A8%A1%E7%89%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/04/04/My-New-Host/">My New Host</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>这是一篇测试博客</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://alanttor.github.io/2024/04/04/My-New-Host/" data-id="clul024vt0000z8um3p0bccko" data-title="My New Host" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%A0%87%E7%AD%BE/" rel="tag">这是一个标签</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/04/03/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-04-03T13:57:36.039Z" itemprop="datePublished">2024-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          常用模版
         
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/04/03/hello-world/">Hello World</a>
-    </h1>
   
+    <a href="/2024/04/04/My-New-Host/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">My New Host</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://alanttor.github.io/2024/04/03/hello-world/" data-id="clujvjvlt0000vgumhfgkdbj2" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
