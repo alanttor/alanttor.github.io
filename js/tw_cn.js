@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
   let currentEncoding = defaultEncoding
   const targetEncodingCookie = 'translate-chn-cht'
   let targetEncoding =
-    btf.saveToLocal.get(targetEncodingCookie) === undefined
+    saveToLocal.get(targetEncodingCookie) === undefined
       ? defaultEncoding
-      : Number(btf.saveToLocal.get('translate-chn-cht'))
+      : Number(saveToLocal.get('translate-chn-cht'))
   let translateButtonObject
   const isSnackbar = snackbarData !== undefined
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       translateButtonObject.textContent = msgToSimplifiedChinese
       isSnackbar && btf.snackbarShow(snackbarData.chs_to_cht)
     }
-    btf.saveToLocal.set(targetEncodingCookie, targetEncoding, 2)
+    saveToLocal.set(targetEncodingCookie, targetEncoding, 2)
     setLang()
     translateBody()
   }
@@ -114,10 +114,9 @@ document.addEventListener('DOMContentLoaded', function () {
   window.translateFn = {
     translatePage,
     Traditionalized,
-    Simplized,
-    translateInitialization
+    Simplized
   }
 
   translateInitialization()
-  btf.addGlobalFn('pjaxComplete', translateInitialization, 'translateInitialization')
+  document.addEventListener('pjax:complete', translateInitialization)
 })

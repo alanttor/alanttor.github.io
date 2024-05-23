@@ -63,27 +63,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const highLight = GLOBAL_CONFIG.highlight
     if (!highLight) return
 
-    const { highlightCopy, highlightLang, highlightHeightLimit, highlightFullpage, highlightMacStyle, plugin } = highLight
+    const { highlightCopy, highlightLang, highlightHeightLimit, plugin } = highLight
     const isHighlightShrink = GLOBAL_CONFIG_SITE.isHighlightShrink
-    const isShowTool = highlightCopy || highlightLang || isHighlightShrink !== undefined || highlightFullpage || highlightMacStyle
+    const isShowTool = highlightCopy || highlightLang || isHighlightShrink !== undefined
     const $figureHighlight = plugin === 'highlight.js' ? document.querySelectorAll('figure.highlight') : document.querySelectorAll('pre[class*="language-"]')
 
     if (!((isShowTool || highlightHeightLimit) && $figureHighlight.length)) return
 
     const isPrismjs = plugin === 'prismjs'
     const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
-    const highlightShrinkEle = isHighlightShrink !== undefined ? '<div><i class="fas fa-angle-down expand"></i></div>' : ''
+    const highlightShrinkEle = isHighlightShrink !== undefined ? '<i class="fas fa-angle-down expand"></i>' : ''
     const highlightCopyEle = highlightCopy ? '<div class="copy-notice"></div><i class="fas fa-paste copy-button"></i>' : ''
-    const highlightMacStyleEle = '<div class="macStyle"><div class="mac-close"></div><div class="mac-minimize"></div><div class="mac-maximize"></div></div>'
-    const highlightFullpageEle = highlightFullpage ? '<i class="fa-solid fa-up-right-and-down-left-from-center fullpage-button"></i>' : ''
 
     const alertInfo = (ele, text) => {
       if (GLOBAL_CONFIG.Snackbar !== undefined) {
         btf.snackbarShow(text)
       } else {
-        ele.textContent = text
-        ele.style.opacity = 1
-        setTimeout(() => { ele.style.opacity = 0 }, 800)
+        const prevEle = ele.previousElementSibling
+        prevEle.textContent = text
+        prevEle.style.opacity = 1
+        setTimeout(() => { prevEle.style.opacity = 0 }, 800)
       }
     }
 
@@ -97,16 +96,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // click events
-    const highlightCopyFn = (ele, clickEle) => {
+    const highlightCopyFn = ele => {
       const $buttonParent = ele.parentNode
       $buttonParent.classList.add('copy-true')
       const selection = window.getSelection()
       const range = document.createRange()
       const preCodeSelector = isPrismjs ? 'pre code' : 'table .code pre'
-      range.selectNodeContents($buttonParent.querySelector(`${preCodeSelector}`))
+      range.selectNodeContents($buttonParent.querySelectorAll(`${preCodeSelector}`)[0])
       selection.removeAllRanges()
       selection.addRange(range)
-      copy(clickEle.previousElementSibling)
+      copy(ele.lastChild)
       selection.removeAllRanges()
       $buttonParent.classList.remove('copy-true')
     }
@@ -115,33 +114,23 @@ document.addEventListener('DOMContentLoaded', function () {
       ele.classList.toggle('closed')
     }
 
-    const codeFullpage = (item, clickEle) => {
-      const wrapEle = item.closest('figure.highlight')
-      const isFullpage = wrapEle.classList.toggle('code-fullpage')
-
-      document.body.style.overflow = isFullpage ? 'hidden' : ''
-      clickEle.classList.toggle('fa-down-left-and-up-right-to-center', isFullpage)
-      clickEle.classList.toggle('fa-up-right-and-down-left-from-center', !isFullpage)
-    }
-
     const highlightToolsFn = function (e) {
       const $target = e.target.classList
       if ($target.contains('expand')) highlightShrinkFn(this)
-      else if ($target.contains('copy-button')) highlightCopyFn(this, e.target)
-      else if ($target.contains('fullpage-button')) codeFullpage(this, e.target)
+      else if ($target.contains('copy-button')) highlightCopyFn(this)
     }
 
     const expandCode = function () {
       this.classList.toggle('expand-done')
     }
 
-    const createEle = (lang, item) => {
+    const createEle = (lang, item, service) => {
       const fragment = document.createDocumentFragment()
 
       if (isShowTool) {
         const hlTools = document.createElement('div')
         hlTools.className = `highlight-tools ${highlightShrinkClass}`
-        hlTools.innerHTML = highlightMacStyleEle + highlightShrinkEle + lang + highlightCopyEle + highlightFullpageEle
+        hlTools.innerHTML = highlightShrinkEle + lang + highlightCopyEle
         btf.addEventListenerPjax(hlTools, 'click', highlightToolsFn)
         fragment.appendChild(hlTools)
       }
@@ -154,33 +143,43 @@ document.addEventListener('DOMContentLoaded', function () {
         fragment.appendChild(ele)
       }
 
-      isPrismjs ? item.parentNode.insertBefore(fragment, item) : item.insertBefore(fragment, item.firstChild)
+      if (service === 'hl') {
+        item.insertBefore(fragment, item.firstChild)
+      } else {
+        item.parentNode.insertBefore(fragment, item)
+      }
     }
 
-    $figureHighlight.forEach(item => {
-      let langName = ''
-      if (isPrismjs) btf.wrap(item, 'figure', { class: 'highlight' })
-
-      if (!highlightLang) {
-        createEle('', item)
-        return
-      }
-
-      if (isPrismjs) {
-        langName = item.getAttribute('data-language') || 'Code'
-      } else {
-        langName = item.getAttribute('class').split(' ')[1]
-        if (langName === 'plain' || langName === undefined) langName = 'Code'
-      }
-      createEle(`<div class="code-lang">${langName}</div>`, item)
-    })
+    if (isPrismjs) {
+      $figureHighlight.forEach(item => {
+        if (highlightLang) {
+          const langName = item.getAttribute('data-language') || 'Code'
+          const highlightLangEle = `<div class="code-lang">${langName}</div>`
+          btf.wrap(item, 'figure', { class: 'highlight' })
+          createEle(highlightLangEle, item)
+        } else {
+          btf.wrap(item, 'figure', { class: 'highlight' })
+          createEle('', item)
+        }
+      })
+    } else {
+      $figureHighlight.forEach(item => {
+        if (highlightLang) {
+          let langName = item.getAttribute('class').split(' ')[1]
+          if (langName === 'plain' || langName === undefined) langName = 'Code'
+          const highlightLangEle = `<div class="code-lang">${langName}</div>`
+          createEle(highlightLangEle, item, 'hl')
+        } else {
+          createEle('', item, 'hl')
+        }
+      })
+    }
   }
 
   /**
    * PhotoFigcaption
    */
   const addPhotoFigcaption = () => {
-    if (!GLOBAL_CONFIG.isPhotoFigcaption) return
     document.querySelectorAll('#article-container img').forEach(item => {
       const altValue = item.title || item.alt
       if (!altValue) return
@@ -334,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (typeof InfiniteGrid === 'function') {
       init()
     } else {
-      await btf.getScript(`${GLOBAL_CONFIG.infinitegrid.js}`)
+      await getScript(`${GLOBAL_CONFIG.infinitegrid.js}`)
       init()
     }
   }
@@ -462,9 +461,6 @@ document.addEventListener('DOMContentLoaded', function () {
           $cardToc.scrollTop = sidebarScrollTop - 150
         }
       }
-
-      // 處理 hexo-blog-encrypt 事件
-      $cardToc.style.display = 'block'
     }
 
     // find head position & add active class
@@ -567,13 +563,13 @@ document.addEventListener('DOMContentLoaded', function () {
     darkmode: () => { // switch between light and dark mode
       const willChangeMode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
       if (willChangeMode === 'dark') {
-        btf.activateDarkMode()
+        activateDarkMode()
         GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.day_to_night)
       } else {
-        btf.activateLightMode()
+        activateLightMode()
         GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.night_to_day)
       }
-      btf.saveToLocal.set('theme', willChangeMode, 2)
+      saveToLocal.set('theme', willChangeMode, 2)
       handleThemeChange(willChangeMode)
     },
     'rightside-config': item => { // Show or hide rightside-hide-btn
@@ -593,24 +589,15 @@ document.addEventListener('DOMContentLoaded', function () {
     'hide-aside-btn': () => { // Hide aside
       const $htmlDom = document.documentElement.classList
       const saveStatus = $htmlDom.contains('hide-aside') ? 'show' : 'hide'
-      btf.saveToLocal.set('aside-status', saveStatus, 2)
+      saveToLocal.set('aside-status', saveStatus, 2)
       $htmlDom.toggle('hide-aside')
     },
-    'mobile-toc-button': function (p, item) { // Show mobile toc
+    'mobile-toc-button': item => { // Show mobile toc
       const tocEle = document.getElementById('card-toc')
       tocEle.style.transition = 'transform 0.3s ease-in-out'
-
-      const tocEleHeight = tocEle.clientHeight
-      const btData = item.getBoundingClientRect()
-
-      const tocEleBottom = window.innerHeight - btData.bottom - 30
-      if (tocEleHeight > tocEleBottom) {
-        tocEle.style.transformOrigin = `right ${tocEleHeight - tocEleBottom - btData.height / 2}px`
-      }
-
       tocEle.classList.toggle('open')
       tocEle.addEventListener('transitionend', () => {
-        tocEle.style.cssText = ''
+        tocEle.style.transition = ''
       }, { once: true })
     },
     'chat-btn': () => { // Show chat
@@ -624,7 +611,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('rightside').addEventListener('click', function (e) {
     const $target = e.target.closest('[id]')
     if ($target && rightSideFn[$target.id]) {
-      rightSideFn[$target.id](this, $target)
+      rightSideFn[$target.id](this)
     }
   })
 
@@ -825,10 +812,6 @@ document.addEventListener('DOMContentLoaded', function () {
       threshold: 0,
       data_src: 'lazy-src'
     })
-
-    btf.addGlobalFn('pjaxComplete', () => {
-      window.lazyLoadInstance.update()
-    }, 'lazyload')
   }
 
   const relativeDate = function (selector) {
@@ -852,29 +835,14 @@ document.addEventListener('DOMContentLoaded', function () {
     GLOBAL_CONFIG.copyright !== undefined && addCopyright()
 
     if (GLOBAL_CONFIG.autoDarkmode) {
-      window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-        if (btf.saveToLocal.get('theme') !== undefined) return
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (saveToLocal.get('theme') !== undefined) return
         e.matches ? handleThemeChange('dark') : handleThemeChange('light')
       })
     }
   }
 
-  const forPostFn = () => {
-    addHighlightTool()
-    addPhotoFigcaption()
-
-    btf.removeGlobalFnEvent('justifiedGallery')
-    const galleryContainer = document.querySelectorAll('#article-container .gallery-container')
-    galleryContainer.length && addJustifiedGallery(galleryContainer)
-
-    runLightbox()
-    scrollFnToDo()
-    addTableWrap()
-    clickFnOfTagHide()
-    tabsFn()
-  }
-
-  const refreshFn = () => {
+  window.refreshFn = function () {
     initAdjust()
 
     if (GLOBAL_CONFIG_SITE.isPost) {
@@ -887,24 +855,24 @@ document.addEventListener('DOMContentLoaded', function () {
       toggleCardCategory()
     }
 
+    scrollFnToDo()
     GLOBAL_CONFIG_SITE.isHome && scrollDownInIndex()
+    addHighlightTool()
+    GLOBAL_CONFIG.isPhotoFigcaption && addPhotoFigcaption()
     scrollFn()
 
-    forPostFn()
+    btf.removeGlobalFnEvent('justifiedGallery')
+    const galleryContainer = document.querySelectorAll('#article-container .gallery-container')
+    galleryContainer.length && addJustifiedGallery(galleryContainer)
+
+    runLightbox()
+    addTableWrap()
+    clickFnOfTagHide()
+    tabsFn()
     switchComments()
     openMobileMenu()
   }
 
-  btf.addGlobalFn('pjaxComplete', refreshFn, 'refreshFn')
   refreshFn()
   unRefreshFn()
-
-  // 處理 hexo-blog-encrypt 事件
-  window.addEventListener('hexo-blog-decrypt', e => {
-    forPostFn()
-    window.translateFn.translateInitialization()
-    Object.values(window.globalFn.encrypt).forEach(fn => {
-      fn()
-    })
-  })
 })
