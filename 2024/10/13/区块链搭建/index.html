@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>区块链搭建 | Hexo</title><meta name="author" content="alanttor"><meta name="copyright" content="alanttor"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本篇博客介绍的是基于FISCO BCOS与WeBASE平台下的区块链简单搭建以及智能合约的调用先来介绍一下相关技术：  区块链技术是一种分布式账本技术，它的核心思想是以去中心化的方式记录和验证所有参与者的交易数据。区块链通过块链式数据结构保证了交易数据的不可篡改性和安全性，在金融、物联网、供应链管理等领域具有广泛的应用前景  FISCO-BCOS是金链盟主导开发的企业级联盟链区块链底层平台，具有高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链搭建">
+<meta property="og:url" content="https://alanttor.github.io/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本篇博客介绍的是基于FISCO BCOS与WeBASE平台下的区块链简单搭建以及智能合约的调用先来介绍一下相关技术：  区块链技术是一种分布式账本技术，它的核心思想是以去中心化的方式记录和验证所有参与者的交易数据。区块链通过块链式数据结构保证了交易数据的不可篡改性和安全性，在金融、物联网、供应链管理等领域具有广泛的应用前景  FISCO-BCOS是金链盟主导开发的企业级联盟链区块链底层平台，具有高">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-10-13T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-13T14:22:36.194Z">
+<meta property="article:author" content="alanttor">
+<meta property="article:tag" content="develop">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://alanttor.github.io/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '区块链搭建',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-13 22:22:36'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">区块链搭建</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-10-13T04:00:00.000Z" title="Created 2024-10-13 12:00:00">2024-10-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-10-13T14:22:36.194Z" title="Updated 2024-10-13 22:22:36">2024-10-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="区块链搭建"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="本篇博客介绍的是基于FISCO-BCOS与WeBASE平台下的区块链简单搭建以及智能合约的调用"><a href="#本篇博客介绍的是基于FISCO-BCOS与WeBASE平台下的区块链简单搭建以及智能合约的调用" class="headerlink" title="本篇博客介绍的是基于FISCO BCOS与WeBASE平台下的区块链简单搭建以及智能合约的调用"></a>本篇博客介绍的是基于FISCO BCOS与WeBASE平台下的区块链简单搭建以及智能合约的调用</h4><p>先来介绍一下相关技术：</p>
+<ul>
+<li><p>区块链技术是一种分布式账本技术，它的核心思想是以去中心化的方式记录和验证所有参与者的交易数据。区块链通过块链式数据结构保证了交易数据的不可篡改性和安全性，在金融、物联网、供应链管理等领域具有广泛的应用前景</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://fisco-bcos-documentation.readthedocs.io/zh-cn/latest/index.html">FISCO-BCOS</a>是金链盟主导开发的企业级联盟链区块链底层平台，具有高度灵活的共识机制和丰富的权限管理功能，致力于为企业级区块链应用提供高性能、高稳定性、易扩展的基础设施支持。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://webasedoc.readthedocs.io/zh-cn/latest/index.html">WeBASE</a> 是在区块链应用和FISCO BCOS节点之间搭建的一套通用组件&#x2F;区块链中间件平台。作为一个区块链可视化平台，开发这套通用组件的目的是为了屏蔽区块链底层的复杂度，降低开发者的门槛，提高区块链应用的开发效率。WeBASE主要包含：节点前置、节点管理、交易链路，数据导出，Web管理平台等子系统。WeBASE将区块链应用开发标准化，按照部署、配置、开发智能合约、开发应用层、在线运维管理五个步骤即可完成一个区块链应用的开发</p>
+</li>
+</ul>
+<h2 id="1-搭建单群组FISCO-BCOS联盟链"><a href="#1-搭建单群组FISCO-BCOS联盟链" class="headerlink" title="1. 搭建单群组FISCO BCOS联盟链"></a>1. 搭建单群组FISCO BCOS联盟链</h2><h3 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h3><table>
+<thead>
+<tr>
+<th>环境</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java</td>
+<td>Oracle JDK 8 至 14</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>MySQL-5.6及以上</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>Python3.6及以上</td>
+</tr>
+<tr>
+<td>PyMySQL</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="平台要求"><a href="#平台要求" class="headerlink" title="平台要求"></a>平台要求</h4><p>推荐使用CentOS 7.2+, Ubuntu 16.04及以上版本</p>
+<h4 id="检查Java"><a href="#检查Java" class="headerlink" title="检查Java"></a>检查Java</h4><p>推荐JDK8-JDK13版本，使用OracleJDK<a target="_blank" rel="noopener" href="https://webasedoc.readthedocs.io/zh-cn/latest/docs/WeBASE/install.html#jdk">安装指引</a>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="检查mysql"><a href="#检查mysql" class="headerlink" title="检查mysql"></a>检查mysql</h4><p>MySQL-5.6或以上版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --version</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Mysql安装部署可参考<a target="_blank" rel="noopener" href="https://webasedoc.readthedocs.io/zh-cn/latest/docs/WeBASE/install.html#mysql-install">数据库部署</a></li>
+</ul>
+<h4 id="检查Python"><a href="#检查Python" class="headerlink" title="检查Python"></a>检查Python</h4><p>使用Python3.6或以上版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python --version</span><br><span class="line"># python3时</span><br><span class="line">python3 --version</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Python3安装部署可参考<a target="_blank" rel="noopener" href="https://webasedoc.readthedocs.io/zh-cn/latest/docs/WeBASE/install.html#python3">Python部署</a></li>
+</ul>
+<h4 id="PyMySQL部署（Python3-6-）"><a href="#PyMySQL部署（Python3-6-）" class="headerlink" title="PyMySQL部署（Python3.6+）"></a>PyMySQL部署（Python3.6+）</h4><p>Python3.6及以上版本，需安装<code>PyMySQL</code>依赖包</p>
+<ul>
+<li><p>CentOS</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install python36-pip</span><br><span class="line">sudo pip3 install PyMySQL</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Ubuntu</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y python3-pip</span><br><span class="line">sudo pip3 install PyMySQL</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>CentOS或Ubuntu不支持pip命令的话，可以使用以下方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/PyMySQL/PyMySQL</span><br><span class="line">cd PyMySQL/</span><br><span class="line">python3 setup.py install</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="检查服务器网络策略"><a href="#检查服务器网络策略" class="headerlink" title="检查服务器网络策略"></a>检查服务器网络策略</h3><p>网络策略检查：</p>
+<ul>
+<li><strong>开放WeBASE管理平台端口</strong>：检查webase-web管理平台页面的端口<code>webPort</code>(默认为5000)在服务器的网络安全组中是否设置为<strong>开放</strong>。如，云服务厂商如腾讯云，查看安全组设置，为webase-web开放5000端口。<strong>若端口未开放，将导致浏览器无法访问WeBASE服务页面</strong></li>
+<li>开放节点前置端口：如果希望通过浏览器直接访问webase-front节点前置的页面，则需要开放节点前置端口<code>frontPort</code>（默认5002）；由于节点前置直连节点，<strong>不建议对公网开放节点前置端口</strong>，建议按需开放</li>
+</ul>
+<h3 id="拉取部署脚本"><a href="#拉取部署脚本" class="headerlink" title="拉取部署脚本"></a>拉取部署脚本</h3><p>获取部署安装包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://osp-1257653870.cos.ap-guangzhou.myqcloud.com/WeBASE/releases/download/v1.5.5/webase-deploy.zip</span><br></pre></td></tr></table></figure>
+
+<p>解压安装包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip webase-deploy.zip</span><br></pre></td></tr></table></figure>
+
+<p>进入目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd webase-deploy</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>进入到 webase-deploy 文件夹下的 common.properties 配置文件</p>
+<p>1.将搭建节点个数改为4（区块链数据可信度更强）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.counts=4</span><br></pre></td></tr></table></figure>
+
+<img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013172642664.png" alt="image-20241013172642664" style="zoom:50%;">
+
+<p>2.将mysql对应的root与password改成自己的</p>
+<img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013173140214.png" alt="image-20241013173140214" style="zoom: 50%;">
+
+
+
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><ul>
+<li>执行installAll命令，部署服务将自动部署FISCO BCOS节点，并部署 WeBASE 中间件服务，包括签名服务（sign）、节点前置（front）、节点管理服务（node-mgr）、节点管理前端（web）</li>
+</ul>
+<p><strong>备注：</strong></p>
+<ul>
+<li>部署脚本会拉取相关安装包进行部署，需保持网络畅通</li>
+<li>首次部署需要下载编译包和初始化数据库，重复部署时可以根据提示不重复操作</li>
+<li>部署过程中出现报错时，可根据错误提示进行操作，或根据本文档中的<a target="_blank" rel="noopener" href="https://webasedoc.readthedocs.io/zh-cn/latest/docs/WeBASE/install.html#q&a">常见问题</a>进行排查</li>
+<li><strong>不要用sudo执行脚本</strong>，例如<code>sudo python3 deploy.py installAll</code>（sudo会导致无法获取当前用户的环境变量如JAVA_HOME）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 部署并启动所有服务</span><br><span class="line">python3 deploy.py installAll</span><br></pre></td></tr></table></figure>
+
+
+
+<p>部署完成后可以看到<code>deploy has completed</code>的日志：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ python3 deploy.py installAll</span><br><span class="line">...</span><br><span class="line">============================================================</span><br><span class="line">              _    _     ______  ___  _____ _____ </span><br><span class="line">             | |  | |    | ___ \/ _ \/  ___|  ___|</span><br><span class="line">             | |  | | ___| |_/ / /_\ \ `--.| |__  </span><br><span class="line">             | |/\| |/ _ | ___ |  _  |`--. |  __| </span><br><span class="line">             \  /\  |  __| |_/ | | | /\__/ | |___ </span><br><span class="line">              \/  \/ \___\____/\_| |_\____/\____/  </span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">============================================================</span><br><span class="line">==============      deploy  has completed     ==============</span><br><span class="line">============================================================</span><br><span class="line">==============    webase-web version  v1.5.5        ========</span><br><span class="line">==============    webase-node-mgr version  v1.5.5   ========</span><br><span class="line">==============    webase-sign version  v1.5.3       ========</span><br><span class="line">==============    webase-front version  v1.5.5      ========</span><br><span class="line">============================================================</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>服务部署后，需要对各服务进行启停操作，可以使用以下命令：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 一键部署</span><br><span class="line">部署并启动所有服务        python3 deploy.py installAll</span><br><span class="line">停止一键部署的所有服务    python3 deploy.py stopAll</span><br><span class="line">启动一键部署的所有服务    python3 deploy.py startAll</span><br><span class="line"># 各子服务启停</span><br><span class="line">启动FISCO-BCOS节点:      python3 deploy.py startNode</span><br><span class="line">停止FISCO-BCOS节点:      python3 deploy.py stopNode</span><br><span class="line">启动WeBASE-Web:          python3 deploy.py startWeb</span><br><span class="line">停止WeBASE-Web:          python3 deploy.py stopWeb</span><br><span class="line">启动WeBASE-Node-Manager: python3 deploy.py startManager</span><br><span class="line">停止WeBASE-Node-Manager: python3 deploy.py stopManager</span><br><span class="line">启动WeBASE-Sign:        python3 deploy.py startSign</span><br><span class="line">停止WeBASE-Sign:        python3 deploy.py stopSign</span><br><span class="line">启动WeBASE-Front:        python3 deploy.py startFront</span><br><span class="line">停止WeBASE-Front:        python3 deploy.py stopFront</span><br><span class="line"># 可视化部署</span><br><span class="line">部署并启动可视化部署的所有服务  python3 deploy.py installWeBASE</span><br><span class="line">停止可视化部署的所有服务  python3 deploy.py stopWeBASE</span><br><span class="line">启动可视化部署的所有服务  python3 deploy.py startWeBASE</span><br></pre></td></tr></table></figure>
+
+<p>部署以后启动webase平台使用 python3 deploy.py startAll 命令就行了</p>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><p>WeBASE管理平台：</p>
+<ul>
+<li>一键部署完成后，<strong>打开浏览器访问</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:5000</span><br><span class="line">提示：localhost为你部署所在系统的ip</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>默认账号为<code>admin</code>，默认密码为<code>Abcd1234</code>。首次登陆要求重置密码</li>
+</ul>
+<p>登录webase平台如下：</p>
+<p><img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013183733177.png" alt="image-20241013183733177"></p>
+<h2 id="2-配置及使用控制台"><a href="#2-配置及使用控制台" class="headerlink" title="2. 配置及使用控制台"></a>2. 配置及使用控制台</h2><p>单群组FISCO BCOS联盟链已通过webase平台搭建完成，现在进行配置及使用控制台：</p>
+<p>注：我们需要利用这个控制台把我们写好的智能合约(sol文件)生成可以让我们在项目中调用的文件(例如java文件)与一些其他的文件(例如abi，bin文件)<br>如在控制台链接FISCO BCOS节点，实现<strong>查询区块链状态、部署调用合约</strong>等功能</p>
+<h3 id="第一步-准备依赖"><a href="#第一步-准备依赖" class="headerlink" title="第一步. 准备依赖"></a>第一步. 准备依赖</h3><ul>
+<li>获取控制台（需要先创建 fisco 文件夹）</li>
+</ul>
+<p><img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013185941201.png" alt="image-20241013185941201"></p>
+<ul>
+<li>然后输入指令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/fisco &amp;&amp; curl -LO https://github.com/FISCO-BCOS/console/releases/download/v2.9.2/download_console.sh &amp;&amp; bash download_console.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>拷贝控制台配置文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -n console/conf/config-example.toml console/conf/config.toml</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置控制台证书</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r nodes/127.0.0.1/sdk/* console/conf/</span><br></pre></td></tr></table></figure>
+
+<p>配置证书时如果报错，是因为我们搭建单群组FISCO BCOS联盟链部分使用的是webase的一键部署方式而不是fisco-bcos</p>
+<p>我们需要找到webase平台配置的证书，路径如下：</p>
+<img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013191110180.png" alt="image-20241013191110180" style="zoom: 50%;">
+
+<p>将这三个文件复制到 fisco&#x2F;console&#x2F;conf&#x2F; 中去</p>
+<img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013191141558.png" alt="image-20241013191141558" style="zoom:50%;">
+
+
+
+
+
+<h3 id="第二步-启动并使用控制台"><a href="#第二步-启动并使用控制台" class="headerlink" title="第二步. 启动并使用控制台"></a>第二步. 启动并使用控制台</h3><ul>
+<li>启动</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/fisco/console &amp;&amp; bash start.sh</span><br></pre></td></tr></table></figure>
+
+<p>输出下述信息表明启动成功 否则请检查conf&#x2F;config.toml中节点端口配置是否正确</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">=============================================================================================</span><br><span class="line">Welcome to FISCO BCOS console(2.6.0)！</span><br><span class="line">Type &#x27;help&#x27; or &#x27;h&#x27; for help. Type &#x27;quit&#x27; or &#x27;q&#x27; to quit console.</span><br><span class="line"> ________  ______   ______    ______    ______         _______    ______    ______    ______</span><br><span class="line">|        \|      \ /      \  /      \  /      \       |       \  /      \  /      \  /      \</span><br><span class="line">| $$$$$$$$ \$$$$$$|  $$$$$$\|  $$$$$$\|  $$$$$$\      | $$$$$$$\|  $$$$$$\|  $$$$$$\|  $$$$$$\</span><br><span class="line">| $$__      | $$  | $$___\$$| $$   \$$| $$  | $$      | $$__/ $$| $$   \$$| $$  | $$| $$___\$$</span><br><span class="line">| $$  \     | $$   \$$    \ | $$      | $$  | $$      | $$    $$| $$      | $$  | $$ \$$    \</span><br><span class="line">| $$$$$     | $$   _\$$$$$$\| $$   __ | $$  | $$      | $$$$$$$\| $$   __ | $$  | $$ _\$$$$$$\</span><br><span class="line">| $$       _| $$_ |  \__| $$| $$__/  \| $$__/ $$      | $$__/ $$| $$__/  \| $$__/ $$|  \__| $$</span><br><span class="line">| $$      |   $$ \ \$$    $$ \$$    $$ \$$    $$      | $$    $$ \$$    $$ \$$    $$ \$$    $$</span><br><span class="line"> \$$       \$$$$$$  \$$$$$$   \$$$$$$   \$$$$$$        \$$$$$$$   \$$$$$$   \$$$$$$   \$$$$$$</span><br><span class="line"></span><br><span class="line">=============================================================================================</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这样控制台配置完成了，然后智能合约的编写设计这里就不做介绍了，下面进入到基于JavaSDK调用智能合约的部分：</p>
+<p>注：.sol文件的智能合约需要编译成ABI和BIN文件才能部署至区块链网络上。有了这两个文件即可凭借Java SDK进行合约部署和调用。下面介绍的是智能合约文件的编译与调用：</p>
+<h2 id="3-编译并调用智能合约"><a href="#3-编译并调用智能合约" class="headerlink" title="3.编译并调用智能合约"></a>3.编译并调用智能合约</h2><p>首先将写好的智能合约文件复制到下图文件路径中（record.sol合约为事先写好的）</p>
+<p><img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013192929263.png" alt="image-20241013192929263"></p>
+<p> 切换到fisco&#x2F;console&#x2F;目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/fisco/console/</span><br></pre></td></tr></table></figure>
+
+<p>编译合约方法如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash sol2java.sh -p org.fisco.bcos.asset.contract</span><br></pre></td></tr></table></figure>
+
+<p>运行成功之后，将会在<code>console/contracts/sdk</code>目录生成java、abi和bin目录，如下所示。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 其它无关文件省略</span><br><span class="line">|-- abi # 生成的abi目录，存放solidity合约编译生成的abi文件</span><br><span class="line">|   |-- Asset.abi</span><br><span class="line">|   |-- Table.abi</span><br><span class="line">|-- bin # 生成的bin目录，存放solidity合约编译生成的bin文件</span><br><span class="line">|   |-- Asset.bin</span><br><span class="line">|   |-- Table.bin</span><br><span class="line">|-- contracts # 存放solidity合约源码文件，将需要编译的合约拷贝到该目录下</span><br><span class="line">|   |-- Asset.sol # 拷贝进来的Asset.sol合约，依赖Table.sol</span><br><span class="line">|   |-- Table.sol # 实现系统CRUD操作的合约接口文件</span><br><span class="line">|-- java  # 存放编译的包路径及Java合约文件</span><br><span class="line">|   |-- org</span><br><span class="line">|        |--fisco</span><br><span class="line">|             |--bcos</span><br><span class="line">|                  |--asset</span><br><span class="line">|                       |--contract</span><br><span class="line">|                             |--Asset.java  # Asset.sol合约生成的Java文件</span><br><span class="line">|                             |--Table.java  # Table.sol合约生成的Java文件</span><br><span class="line">|-- sol2java.sh</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后将生成的三种文件部署在项目的对应位置就能基于java SDK调用智能合约了</p>
+<p>项目的文件目录：</p>
+<img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013194209040.png" alt="image-20241013194209040" style="zoom: 80%;">
+
+
+
+<p>在测试类中调用智能合约：</p>
+<p><img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013193848184.png" alt="image-20241013193848184"></p>
+<p>webase平台中出现合约交易记录：</p>
+<p><img src="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/image-20241013193841228.png" alt="image-20241013193841228"></p>
+<h3 id="至此，区块链的简单搭建与智能合约的调用介绍完成"><a href="#至此，区块链的简单搭建与智能合约的调用介绍完成" class="headerlink" title="至此，区块链的简单搭建与智能合约的调用介绍完成"></a>至此，区块链的简单搭建与智能合约的调用介绍完成</h3></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://alanttor.github.io">alanttor</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://alanttor.github.io/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/">https://alanttor.github.io/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/develop/">develop</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/06/03/Git/" title="Git"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Git</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">alanttor</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E7%AF%87%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D%E7%9A%84%E6%98%AF%E5%9F%BA%E4%BA%8EFISCO-BCOS%E4%B8%8EWeBASE%E5%B9%B3%E5%8F%B0%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%9D%97%E9%93%BE%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BA%E4%BB%A5%E5%8F%8A%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E8%B0%83%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">本篇博客介绍的是基于FISCO BCOS与WeBASE平台下的区块链简单搭建以及智能合约的调用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%90%AD%E5%BB%BA%E5%8D%95%E7%BE%A4%E7%BB%84FISCO-BCOS%E8%81%94%E7%9B%9F%E9%93%BE"><span class="toc-number"></span> <span class="toc-text">1. 搭建单群组FISCO BCOS联盟链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="toc-number"></span> <span class="toc-text">前提条件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E8%A6%81%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">平台要求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5Java"><span class="toc-number">2.</span> <span class="toc-text">检查Java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5mysql"><span class="toc-number">3.</span> <span class="toc-text">检查mysql</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5Python"><span class="toc-number">4.</span> <span class="toc-text">检查Python</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PyMySQL%E9%83%A8%E7%BD%B2%EF%BC%88Python3-6-%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">PyMySQL部署（Python3.6+）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BD%91%E7%BB%9C%E7%AD%96%E7%95%A5"><span class="toc-number"></span> <span class="toc-text">检查服务器网络策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E9%83%A8%E7%BD%B2%E8%84%9A%E6%9C%AC"><span class="toc-number"></span> <span class="toc-text">拉取部署脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="toc-number"></span> <span class="toc-text">修改配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number"></span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE"><span class="toc-number"></span> <span class="toc-text">访问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="toc-number"></span> <span class="toc-text">2. 配置及使用控制台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E5%87%86%E5%A4%87%E4%BE%9D%E8%B5%96"><span class="toc-number"></span> <span class="toc-text">第一步. 准备依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E5%90%AF%E5%8A%A8%E5%B9%B6%E4%BD%BF%E7%94%A8%E6%8E%A7%E5%88%B6%E5%8F%B0"><span class="toc-number"></span> <span class="toc-text">第二步. 启动并使用控制台</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%BC%96%E8%AF%91%E5%B9%B6%E8%B0%83%E7%94%A8%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6"><span class="toc-number"></span> <span class="toc-text">3.编译并调用智能合约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%B3%E6%AD%A4%EF%BC%8C%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E7%AE%80%E5%8D%95%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E8%B0%83%E7%94%A8%E4%BB%8B%E7%BB%8D%E5%AE%8C%E6%88%90"><span class="toc-number"></span> <span class="toc-text">至此，区块链的简单搭建与智能合约的调用介绍完成</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/13/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%90%AD%E5%BB%BA/" title="区块链搭建">区块链搭建</a><time datetime="2024-10-13T04:00:00.000Z" title="Created 2024-10-13 12:00:00">2024-10-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/03/Git/" title="Git">Git</a><time datetime="2024-06-03T05:09:46.000Z" title="Created 2024-06-03 13:09:46">2024-06-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/30/Maven/" title="Maven">Maven</a><time datetime="2024-05-30T03:43:49.000Z" title="Created 2024-05-30 11:43:49">2024-05-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/23/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98/" title="hexo搭建博客图片问题">hexo搭建博客图片问题</a><time datetime="2024-05-23T02:26:04.000Z" title="Created 2024-05-23 10:26:04">2024-05-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/13/Ajax%E4%B8%8Eaxios/" title="Ajax与axios">Ajax与axios</a><time datetime="2024-05-13T02:37:02.000Z" title="Created 2024-05-13 10:37:02">2024-05-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By alanttor</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
